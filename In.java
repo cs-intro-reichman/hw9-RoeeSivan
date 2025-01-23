@@ -74,6 +74,8 @@
      //// end: section (1 of 2) of code duplicated from In to StdIn.
  
      private Scanner scanner;
+
+    private URL url;
  
     /**
       * Initializes an input stream from standard input.
@@ -152,7 +154,8 @@
       *         a file or URL
       * @throws IllegalArgumentException if {@code name} is {@code null}
       */
-     public In(String name) {
+     @SuppressWarnings("deprecation")
+    public In(String name) {
          if (name == null) throw new IllegalArgumentException("argument is null");
          if (name.length() == 0) throw new IllegalArgumentException("argument is the empty string");
          try {
@@ -167,8 +170,7 @@
                  return;
              }
  
-             // resource relative to .class file
-             URL url = getClass().getResource(name);
+             url = getClass().getResource(name);
  
              // resource relative to classloader root
              if (url == null) {
